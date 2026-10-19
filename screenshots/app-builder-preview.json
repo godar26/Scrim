@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Noxius · Codex Esport",
+      "hasCanvas": false,
+      "bodyTextLen": 13194,
+      "bodyTextHash": "fef09ecdaaff7091a70b64c7c4bc94f198ef127f67ab1290f4d8ecdcc22fdff2",
+      "bodyTextPrefix": "NOXIUS Guide PDF Accueil Réglages Cartes Formats Rôles Interdit ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Noxius · Codex Esport",
+      "hasCanvas": false,
+      "bodyTextLen": 13194,
+      "bodyTextHash": "fef09ecdaaff7091a70b64c7c4bc94f198ef127f67ab1290f4d8ecdcc22fdff2",
+      "bodyTextPrefix": "NOXIUS Guide PDF Accueil Réglages Cartes Formats Rôles Interdit ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-preview.json"
+}
