@@ -27,6 +27,25 @@ export type Chip = {
   sub?: string;
 };
 
+export type ModeId = "hardpoint" | "snd" | "control";
+
+/** Dossier des visuels. Remplace le fichier en gardant le même nom. */
+export const MAPS_FOLDER = "public/maps";
+
+/**
+ * Registre des maps. C'est le fichier à éditer si un visuel change de nom.
+ * Les images elles-mêmes vivent dans public/maps/.
+ */
+export type MapDef = {
+  id: string;
+  name: string;
+  mode: ModeId;
+  file: string;
+  provisional?: boolean;
+  line: string;
+};
+
+
 export const modes = [
   {
     id: "hp",
@@ -74,46 +93,110 @@ export const modes = [
   },
 ] as const;
 
-export const pools = [
+export const MAPS: MapDef[] = [
   {
-    mode: "Point chaud",
-    en: "Hardpoint",
-    image: "/art/hardpoint.jpg",
-    maps: [
-      { name: "Summit", note: "Complexe enneigé, volume intérieur, rebords à ne pas ignorer." },
-      { name: "Hacienda", note: "Cour et toits. Les angles courts décident les rotations." },
-      { name: "Combine", note: "Industriel, lignes droites, peu de place pour une mauvaise poussée." },
-      { name: "Takeoff", note: "Terminal et carlingue. On coupe les escalators, pas la carte." },
-      { name: "Arsenal", note: "Base d'armement. Les halls longs punissent le sprint nu." },
-    ],
+    id: "summit",
+    name: "Summit",
+    mode: "hardpoint",
+    file: "summit.jpg",
+    line: "Station d'altitude, neige et relais.",
   },
   {
-    mode: "Recherche et destruction",
-    en: "Search & Destroy",
-    image: "/art/snd.jpg",
-    maps: [
-      { name: "Tunisia", note: "Rues larges, sites éloignés. L'info vaut une vie." },
-      { name: "Firing Range", note: "Base d'entraînement. Milieu contesté, retakes courts." },
-      { name: "Coastal", note: "Falaise et niveaux. Le son porte, les fumées aussi." },
-      { name: "Slums", note: "Ruelles et toits. Le close range y est honnête." },
-      { name: "Meltdown", note: "Centrale. Les couloirs de réacteur cassent les executes tardifs." },
-    ],
+    id: "hacienda",
+    name: "Hacienda",
+    mode: "hardpoint",
+    file: "hacienda.jpg",
+    line: "Villa en pierre, cour et fontaine.",
   },
   {
-    mode: "Contrôle",
-    en: "Control",
-    image: "/art/control.jpg",
-    maps: [
-      { name: "Raid", note: "Villa. Les deux zones se jouent souvent en split." },
-      { name: "Standoff", note: "Ville basse. La mid ouvre les deux points." },
-      { name: "Crossroads Strike", note: "Variante strike du carrefour. Moins de carte, plus de timing." },
-    ],
+    id: "combine",
+    name: "Combine",
+    mode: "hardpoint",
+    file: "combine.jpg",
+    line: "Entrepôt, passerelles et caisses.",
   },
-] as const;
+  {
+    id: "takeoff",
+    name: "Takeoff",
+    mode: "hardpoint",
+    file: "takeoff.jpg",
+    line: "Terminal, passerelles et pistes.",
+  },
+  {
+    id: "arsenal",
+    name: "Arsenal",
+    mode: "hardpoint",
+    file: "arsenal.jpg",
+    line: "Complexe militaire fortifié.",
+  },
+  {
+    id: "tunisia",
+    name: "Tunisia",
+    mode: "snd",
+    file: "tunisia.jpg",
+    line: "Médina, toits plats et ruelles.",
+  },
+  {
+    id: "firing-range",
+    name: "Firing Range",
+    mode: "snd",
+    file: "firing-range.jpg",
+    line: "Pas de tir, bermes et conteneurs.",
+  },
+  {
+    id: "coastal",
+    name: "Coastal",
+    mode: "snd",
+    file: "coastal.jpg",
+    line: "Village de falaise et quais.",
+  },
+  {
+    id: "slums",
+    name: "Slums",
+    mode: "snd",
+    file: "slums.jpg",
+    line: "Bidonville, escaliers et toits.",
+  },
+  {
+    id: "meltdown",
+    name: "Meltdown",
+    mode: "snd",
+    file: "meltdown.jpg",
+    line: "Centrale, tours et tuyauterie.",
+  },
+  {
+    id: "raid",
+    name: "Raid",
+    mode: "control",
+    file: "raid.jpg",
+    provisional: true,
+    line: "Villa de nuit. Plan provisoire : remplace le fichier.",
+  },
+  {
+    id: "standoff",
+    name: "Standoff",
+    mode: "control",
+    file: "standoff.jpg",
+    provisional: true,
+    line: "Ville en trois axes. Plan provisoire : remplace le fichier.",
+  },
+  {
+    id: "crossroads-strike",
+    name: "Crossroads Strike",
+    mode: "control",
+    file: "crossroads-strike.jpg",
+    provisional: true,
+    line: "Carrefour et pont. Plan provisoire : remplace le fichier.",
+  },
+];
 
-const hpPool = ["Summit", "Hacienda", "Combine", "Takeoff", "Arsenal"];
-const sndPool = ["Tunisia", "Firing Range", "Coastal", "Slums", "Meltdown"];
-const ctlPool = ["Raid", "Standoff", "Crossroads Strike"];
+export function mapFilePath(file: string) {
+  return `/${MAPS_FOLDER.replace(/^public\//, "")}/${file}`;
+}
+
+const hpPool = MAPS.filter(({ mode }) => mode === "hardpoint").map(({ name }) => name);
+const sndPool = MAPS.filter(({ mode }) => mode === "snd").map(({ name }) => name);
+const ctlPool = MAPS.filter(({ mode }) => mode === "control").map(({ name }) => name);
 
 export const formats: FormatBoard[] = [
   {
